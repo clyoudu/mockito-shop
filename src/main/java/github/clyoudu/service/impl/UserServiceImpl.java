@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         return userDao.selectById(id);
     }
 
-    private String getUsername(String email) {
+    public String getUsername(String email) {
         return email.substring(0, email.indexOf("@"));
     }
 
