@@ -79,4 +79,15 @@ public class ConditionMock {
         Assert.assertEquals(new Long(999), users.get(0).getId());
     }
 
+    @Test
+    public void testConditionReturn_1() {
+        Mockito.when(userDao.insert(Mockito.any())).thenReturn(
+                new User(999L, "Bob", "bob@aa.com"),
+                new User(1000L, "David", "david@bb.com")
+        );
+
+        List<User> users = Arrays.asList(new User("Bob", "bob@aa.com"), new User("David", "david@bb.com"));
+        Assert.assertEquals(2, userService.batchInsert2(users));
+    }
+
 }
