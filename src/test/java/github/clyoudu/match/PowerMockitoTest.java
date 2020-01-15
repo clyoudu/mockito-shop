@@ -38,7 +38,7 @@ public class PowerMockitoTest {
     @Test
     public void testFinal () {
         PowerMockito.when(idGenerator.generated(Mockito.anyLong())).thenReturn(false);
-        Assert.assertTrue(!idGenerator.generated(1L));
+        Assert.assertFalse(idGenerator.generated(1L));
 
         PowerMockito.when(idGenerator.generated(Mockito.anyLong())).thenReturn(true);
         Assert.assertTrue(idGenerator.generated(1L));
