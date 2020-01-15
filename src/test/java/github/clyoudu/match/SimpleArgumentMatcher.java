@@ -1,10 +1,8 @@
 package github.clyoudu.match;
 
 import github.clyoudu.controller.UserController;
-import github.clyoudu.dao.UserDao;
 import github.clyoudu.model.pojo.User;
 import github.clyoudu.service.UserService;
-import github.clyoudu.service.impl.UserServiceImpl;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

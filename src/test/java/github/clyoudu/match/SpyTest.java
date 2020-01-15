@@ -2,7 +2,6 @@ package github.clyoudu.match;
 
 import github.clyoudu.controller.UserController;
 import github.clyoudu.model.pojo.User;
-import github.clyoudu.service.UserService;
 import github.clyoudu.service.impl.UserServiceImpl;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.exceptions.base.MockitoException;
