@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public synchronized User upsert(User user) {
-        if (user.getId() != null) {
+        if (user.getId() != null && selectById(user.getId()) != null) {
             return update(user);
         }
         return insert(user);
@@ -110,6 +111,42 @@ public class UserServiceImpl implements UserService {
     public User selectById(Long id) {
         checkId(id);
         return userDao.selectById(id);
+    }
+
+    @Override
+    public int count() {
+        int count = userDao.count();
+
+        if(count < 0) {
+            count = 0;
+        }
+        return count;
+    }
+
+    @Override
+    public List<User> search(String keyword) {
+        if (keyword == null) {
+            return selectAll();
+        }
+
+        List<User> search = userDao.search(keyword);
+        if(search == null) {
+            search = new ArrayList<>();
+        }
+        return search;
+    }
+
+    @Override
+    public List<User> search2(String keyword) {
+        if (keyword == null) {
+            return selectAll();
+        }
+
+        List<User> search = userDao.search2(keyword);
+        if(search == null) {
+            search = new ArrayList<>();
+        }
+        return search;
     }
 
     public String getUsername(String email) {

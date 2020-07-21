@@ -25,4 +25,7 @@ public interface UserService {
     User update (User user);
     List<User> selectAll ();
     User selectById (Long id);
+    int count ();
+    List<User> search(String keyword);
+    List<User> search2(String keyword);
 }

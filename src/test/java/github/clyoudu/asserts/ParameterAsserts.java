@@ -33,4 +33,12 @@ public class ParameterAsserts {
         Assert.assertEquals("aaa", userArgumentCaptor.getValue().getUsername());
     }
 
+    @Test
+    public void testParameter1 () {
+        Mockito.doReturn(new User()).when(userService).insert(Mockito.any(User.class));
+        userController.register("aaa@bb.com");
+        Mockito.verify(userService, Mockito.times(1))
+                .insert(Mockito.argThat((ArgumentMatcher<User>) user -> "aaa".equals(user.getUsername())));
+    }
+
 }

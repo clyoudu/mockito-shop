@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA
@@ -20,7 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Repository
 public class UserDao {
 
-    private final static CopyOnWriteArrayList<User> USERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<User> USERS = new CopyOnWriteArrayList<>();
 
     public User insert(User user) {
         user.setId(IdGenerator.getId());
@@ -51,5 +52,31 @@ public class UserDao {
         return USERS.stream().filter(user -> user.getId().equals(id)).findFirst().orElse(null);
     }
 
+    public final int count(){
+        return USERS.size();
+    }
 
+    public List<User> search(String keyword) {
+        return USERS.stream().filter(user -> match(user, keyword)).collect(Collectors.toList());
+    }
+
+    private boolean match(User user, String keyword) {
+        if(user.getUsername().contains(keyword) || user.getEmail().contains(keyword)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected boolean match2(User user, String keyword) {
+        if(user.getUsername().contains(keyword) || user.getEmail().contains(keyword)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<User> search2(String keyword) {
+        return USERS.stream().filter(user -> match2(user, keyword)).collect(Collectors.toList());
+    }
 }
